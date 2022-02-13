@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SimpleFragment.OnFragmentInteractionListener {
+
     private Button openButton;
     private Boolean isFragmentDisplayed = false;
+
     private final String FRAGMENT_STATE = "fragment-state";
     private int mCurrentChoice = 2;
 
@@ -21,14 +23,13 @@ public class MainActivity extends AppCompatActivity implements SimpleFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        openButton= findViewById(R.id.open_btn);
+        openButton = findViewById(R.id.open_btn);
         openButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isFragmentDisplayed) {
+                if(!isFragmentDisplayed){
                     openFragment();
-                }
-                else{
+                }else{
                     closeFragment();
                 }
             }
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements SimpleFragment.On
     private void closeFragment(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         SimpleFragment simpleFragment = (SimpleFragment) fragmentManager.findFragmentById(R.id.fragment_container);
         fragmentTransaction.remove(simpleFragment).commit();
 
@@ -72,6 +74,6 @@ public class MainActivity extends AppCompatActivity implements SimpleFragment.On
     @Override
     public void onRadioButtonChoiceChecked(int choice) {
         mCurrentChoice = choice;
-        Toast.makeText(this, "choice is" + String.valueOf(choice), Toast.LENGTH_SHORT);
+        Toast.makeText(this, "choice is " + String.valueOf(choice), Toast.LENGTH_SHORT).show();
     }
 }

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class SimpleFragment extends Fragment {
 
     public static SimpleFragment newInstance(){
         SimpleFragment fragment = new SimpleFragment();
+
         return fragment;
     }
 
@@ -69,7 +71,8 @@ public class SimpleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_simple, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_simple, container, false);
         RadioGroup radioGroup = view.findViewById(R.id.radio_group);
         TextView articleQuestionTextView = view.findViewById(R.id.question_textview);
 
@@ -77,17 +80,16 @@ public class SimpleFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton btn = radioGroup.findViewById(i);
-                int selectedIndex =radioGroup.indexOfChild(btn);
+                int selectedIndex = radioGroup.indexOfChild(btn);
 
-                switch(selectedIndex) {
-                    case YES: //User choose "Yes."
+                switch (selectedIndex){
+                    case YES:
                         articleQuestionTextView.setText(R.string.yes_message);
                         break;
-                    case NO: //User choose "No."
+                    case NO:
                         articleQuestionTextView.setText(R.string.no_message);
                         break;
-                    default: // No Choice made.
-                        //Do nothing.
+                    default:
                         break;
                 }
             }
